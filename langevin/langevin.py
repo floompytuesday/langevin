@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 
 
-def parse_arguements():
+def parse_arguments():
     '''Get arguements from the command line'''
     parser=argparse.ArgumentParser(description='Langevin Dynamics in Python')
     parser.add_argument('--initial_position', type=float, default=1)
@@ -27,9 +27,11 @@ time_array=[0]
 
 def step(xi,vi,args):
     #calculate one timestep using eulers method
-    drag=-1*args.damping_coefficient*args.inital_velocity
+    drag=-1*args.damping_coefficient*args.initial_velocity
     random=np.random.normal(0, 2*args.temperature*args.damping_coefficient)
     force=drag+random
     vj=vi+force*args.time_step
     xj=xi+vi*args.time_step
     return xj,vj
+
+step(position_array[-1],velocity_array[-1], args)
