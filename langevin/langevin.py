@@ -25,13 +25,15 @@ time_array=[0]
 
 
 
-def step(xi,vi,args):
+def step(xi,vi,args,testing=False):
     #calculate one timestep using eulers method
     drag=-1*args.damping_coefficient*args.initial_velocity
     random=np.random.normal(0, 2*args.temperature*args.damping_coefficient)
-    force=drag+random
+    if testing:
+        force=drag
+    else:
+        force=drag+random
     vj=vi+force*args.time_step
     xj=xi+vi*args.time_step
     return xj,vj
 
-step(position_array[-1],velocity_array[-1], args)
