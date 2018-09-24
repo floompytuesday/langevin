@@ -17,6 +17,8 @@ langevin
 .. image:: https://pyup.io/repos/github/floompytuesday/langevin/shield.svg
      :target: https://pyup.io/repos/github/floompytuesday/langevin/
      :alt: Updates
+.. image:: https://coveralls.io/repos/github/floompytuesday/langevin/badge.svg?branch=master
+:target: https://coveralls.io/github/floompytuesday/langevin?branch=master
 
 
 
