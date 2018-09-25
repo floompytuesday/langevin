@@ -3,7 +3,9 @@
 """Main module."""
 import argparse 
 import numpy as np
+from os import path
 
+testing_directory=path.join(path.dirname(__file__), 'tests')
 
 def parse_arguments():
     '''Get arguements from the command line'''
@@ -14,14 +16,13 @@ def parse_arguments():
     parser.add_argument('--damping_coefficient', type=float, default=1)
     parser.add_argument('--time_step', type=float, default=1)
     parser.add_argument('--total_time', type=float, default=10)
-    
+    parser.add_argument('--output', type=str, default=testing_directory+r'output_test.txt')
     return parser.parse_args()
 
 args=parse_arguments()
 
-velocity_array=[args.initial_velocity]
-position_array=[args.initial_position]
-time_array=[0]
+
+
 
 def runge_kutta(xi,vi,args,testing=False):
     drag=-1*args.damping_coefficient
@@ -29,15 +30,20 @@ def runge_kutta(xi,vi,args,testing=False):
     k1=drag*vi+random
     k2=drag*(vi+1/2*k1)
     k3=drag*(vi+1/2*k2)
-    k4=drag*(vi+*k3)
-    vj=vi+1/6*(k1+2k2+2k3+k4)+random
+    k4=drag*(vi+k3)
+    vj=vi+1/6*(k1+2*k2+2*k3+k4)+random
     xj=xi+vi*args.time_step
     return vj,xj
     
                           
-    
+def write_output(index,velocity,position,time,output_file):
 
+    '''writes an output file'''
+    with open(output_file, 'w') as f:
+        for i in range(len(index)):
+            f.write('{0}, {1}, {2}, {3}'.format(index[i], time[i], position[i], velocity[i]))
 
+                        
 def step(xi,vi,args,testing=False):
     #calculate one timestep using eulers method
     drag=-1*args.damping_coefficient*vi
@@ -49,4 +55,26 @@ def step(xi,vi,args,testing=False):
     vj=vi+force*args.time_step
     xj=xi+vi*args.time_step
     return xj,vj
+def run(args):
+    cycles=int(args.total_time/args.time_step)
+    xi=args.initial_position
+    vi=args.initial_velocity
+    velocity_array=[vi]
+    position_array=[xi]
+    time_array=[0]
+    index_array=[0]
+    for i in range(cycles):
+        xj,vj=step(position_array[-1], velocity_array[-1], args)
+        velocity_array.append(vj)
+        position_array.append(xj)
+        time_array.append((i+1)*args.time_step)
+        index_array.append(i+1)
+    write_output(index_array,velocity_array,position_array,time_array,args.output)
+    return velocity_array
+run(args)
+        
+        
+    
+                        
+                       
 
