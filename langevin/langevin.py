@@ -23,11 +23,24 @@ velocity_array=[args.initial_velocity]
 position_array=[args.initial_position]
 time_array=[0]
 
+def runge_kutta(xi,vi,args,testing=False):
+    drag=-1*args.damping_coefficient
+    random=np.random.normal(0,2*args.temperature*args.damping_coefficient)
+    k1=drag*vi+random
+    k2=drag*(vi+1/2*k1)
+    k3=drag*(vi+1/2*k2)
+    k4=drag*(vi+*k3)
+    vj=vi+1/6*(k1+2k2+2k3+k4)+random
+    xj=xi+vi*args.time_step
+    return vj,xj
+    
+                          
+    
 
 
 def step(xi,vi,args,testing=False):
     #calculate one timestep using eulers method
-    drag=-1*args.damping_coefficient*args.initial_velocity
+    drag=-1*args.damping_coefficient*vi
     random=np.random.normal(0, 2*args.temperature*args.damping_coefficient)
     if testing:
         force=drag
