@@ -10,7 +10,8 @@ from click.testing import CliRunner
 from langevin import langevin
 from langevin import cli
 from langevin import *
-
+from os import path
+test_dir = path.dirname(__file__)
 
 @pytest.fixture
 def response():
@@ -58,3 +59,39 @@ def test_step():
     a,b=langevin.step(xi, vi, args, testing=True)
     assert a>xi
     assert b<vi
+def test_write_output():
+    '''tests that the output function can write a mock'''
+    
+    output_example=test_dir+r'\output_test'
+    index=[0,1,2,3,4]
+    time=[0,.2,.4,.6,.8]
+    position=[0,.7,-.4,3,.3]
+    velocity=[.7,2,6,2,6]
+    
+    langevin.write_output(index,velocity,position,time,output_example)
+    
+    with open(output_example,'r') as f:
+        test=f.read()
+    with open(test_dir+r'\output_test_correct.txt', 'r') as h:
+        correct=h.read()
+    assert(test==correct)
+
+def test_run():
+    '''tests that the run function performs correctly'''
+    
+    
+    class args:
+        def __init__():
+            pass
+
+        time_step = .1
+        total_time = 100.0
+        initial_position = 0
+        initial_velocity = 10
+        damping_coefficient = 1.0
+        temperature = 1.0
+        output=test_dir+r'output_test.txt'
+        
+    v=langevin.run(args)
+    #assert len(v)==1001
+    

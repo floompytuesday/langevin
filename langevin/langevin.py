@@ -4,7 +4,7 @@
 import argparse 
 import numpy as np
 from os import path
-
+np.random.seed(42)
 testing_directory=path.join(path.dirname(__file__), 'tests')
 
 def parse_arguments():
