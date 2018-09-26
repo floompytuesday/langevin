@@ -14,7 +14,7 @@ def parse_arguments():
     parser.add_argument('--initial_velocity', type=float, default=1)
     parser.add_argument('--temperature', type=float, default=10)
     parser.add_argument('--damping_coefficient', type=float, default=1)
-    parser.add_argument('--time_step', type=float, default=1)
+    parser.add_argument('--time_step', type=float, default=.1)
     parser.add_argument('--total_time', type=float, default=10)
     parser.add_argument('--output', type=str, default=testing_directory+r'output_test.txt')
     return parser.parse_args()
@@ -41,7 +41,7 @@ def write_output(index,velocity,position,time,output_file):
     '''writes an output file'''
     with open(output_file, 'w') as f:
         for i in range(len(index)):
-            f.write('{0}, {1}, {2}, {3}'.format(index[i], time[i], position[i], velocity[i]))
+            f.write('{0}, {1:0.06f}, {2:0.06f}, {3:0.06f}\n'.format(index[i], time[i], position[i], velocity[i]))
 
                         
 def step(xi,vi,args,testing=False):
