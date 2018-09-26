@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 from os import path
 np.random.seed(42)
-testing_directory=path.join(path.dirname(__file__), 'tests')
+testing_directory=path.join(path.dirname(__file__), r'tests')
 
 def parse_arguments():
     '''Get arguements from the command line'''
@@ -16,7 +16,7 @@ def parse_arguments():
     parser.add_argument('--damping_coefficient', type=float, default=1)
     parser.add_argument('--time_step', type=float, default=.1)
     parser.add_argument('--total_time', type=float, default=10)
-    parser.add_argument('--output', type=str, default=testing_directory+r'output_test.txt')
+    parser.add_argument('--output', type=str, default=testing_directory+ r'output_test')
     return parser.parse_args()
 
 args=parse_arguments()
