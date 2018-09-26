@@ -72,7 +72,7 @@ def test_write_output():
     
     with open(output_example,'r') as f:
         test=f.read()
-    with open(test_dir+r'\output_test_correct.txt', 'r') as h:
+    with open(test_dir+r'/output_test_correct.txt', 'r') as h:
         correct=h.read()
     assert(test==correct)
 
