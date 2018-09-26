@@ -38,14 +38,30 @@ def runge_kutta(xi,vi,args,testing=False):
                           
 def write_output(index,velocity,position,time,output_file):
 
-    '''writes an output file'''
+    '''writes an output file
+    
+    
+    index:  array of indices
+    velocity:  array of velocities
+    position:  array of positions
+    time:  array of times
+    output_file:  where to write the output to
+    
+    '''
     with open(output_file, 'w') as f:
         for i in range(len(index)):
             f.write('{0}, {1:0.06f}, {2:0.06f}, {3:0.06f}\n'.format(index[i], time[i], position[i], velocity[i]))
 
                         
 def step(xi,vi,args,testing=False):
-    #calculate one timestep using eulers method
+    '''calculate one timestep using eulers method
+    xi: position value 
+    vi:  velocity value
+    args: command line arguments
+    testing:  True if unit testing to avoid affects of random force'''
+    
+    
+    
     drag=-1*args.damping_coefficient*vi
     random=np.random.normal(0, 2*args.temperature*args.damping_coefficient)
     if testing:
@@ -56,6 +72,8 @@ def step(xi,vi,args,testing=False):
     xj=xi+vi*args.time_step
     return xj,vj
 def run(args):
+    '''runs the simulation for number of timesteps based on totaltime/time_step
+    args: command line arguments'''
     cycles=int(args.total_time/args.time_step)
     xi=args.initial_position
     vi=args.initial_velocity
