@@ -7,7 +7,7 @@ from os import path
 np.random.seed(42)
 testing_directory=path.join(path.dirname(__file__), r'tests')
 
-def parse_arguments():
+def parse_arguments(): # pragma: no cover
     '''Get arguements from the command line'''
     parser=argparse.ArgumentParser(description='Langevin Dynamics in Python')
     parser.add_argument('--initial_position', type=float, default=1)
@@ -19,7 +19,7 @@ def parse_arguments():
     parser.add_argument('--output', type=str, default=testing_directory+ r'output_test')
     return parser.parse_args()
 
-args=parse_arguments()
+
 
 
 
@@ -89,7 +89,16 @@ def run(args):
         index_array.append(i+1)
     write_output(index_array,velocity_array,position_array,time_array,args.output)
     return velocity_array
-run(args)
+
+
+def main():
+    args=parse_arguments()
+    print(args)
+    run(args)
+
+    
+if __name__=='__main__':
+    main()
         
         
     
