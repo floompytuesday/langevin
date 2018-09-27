@@ -18,22 +18,6 @@ def parse_arguments(): # pragma: no cover
     parser.add_argument('--total_time', type=float, default=10)
     parser.add_argument('--output', type=str, default=testing_directory+ r'output_test')
     return parser.parse_args()
-
-
-
-
-
-
-def runge_kutta(xi,vi,args,testing=False):
-    drag=-1*args.damping_coefficient
-    random=np.random.normal(0,2*args.temperature*args.damping_coefficient)
-    k1=drag*vi+random
-    k2=drag*(vi+1/2*k1)
-    k3=drag*(vi+1/2*k2)
-    k4=drag*(vi+k3)
-    vj=vi+1/6*(k1+2*k2+2*k3+k4)+random
-    xj=xi+vi*args.time_step
-    return vj,xj
     
                           
 def write_output(index,velocity,position,time,output_file):
@@ -87,6 +71,10 @@ def run(args):
         position_array.append(xj)
         time_array.append((i+1)*args.time_step)
         index_array.append(i+1)
+        if position_array[-1]>=5:
+            break
+        if position_array[-1]<=0:
+            break
     write_output(index_array,velocity_array,position_array,time_array,args.output)
     return velocity_array
 
