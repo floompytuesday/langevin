@@ -16,6 +16,7 @@ before_install:
 - pip install coverage
 - pip install matplotlib
 - pip install scipy
+- pip install -U tox
 - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
 
 
