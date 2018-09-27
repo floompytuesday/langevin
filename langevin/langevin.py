@@ -4,13 +4,25 @@
 import argparse 
 import numpy as np
 from os import path
-np.random.seed(42)
+
 testing_directory=path.join(path.dirname(__file__), r'tests')
+
+
+def check_in_bounds(value):
+    ivalue = int(value)
+    if ivalue <= 0 or ivalue>=5:
+        raise argparse.ArgumentTypeError("%s is an invalid starting position based on the size of the box" % value)
+    else:
+        return True 
+
+
+
+
 
 def parse_arguments(): # pragma: no cover
     '''Get arguements from the command line'''
     parser=argparse.ArgumentParser(description='Langevin Dynamics in Python')
-    parser.add_argument('--initial_position', type=float, default=1)
+    parser.add_argument('--initial_position', type=check_in_bounds, default=1)
     parser.add_argument('--initial_velocity', type=float, default=1)
     parser.add_argument('--temperature', type=float, default=10)
     parser.add_argument('--damping_coefficient', type=float, default=1)
@@ -76,13 +88,14 @@ def run(args):
         if position_array[-1]<=0:
             break
     write_output(index_array,velocity_array,position_array,time_array,args.output)
-    return velocity_array
+    print(velocity_array[-1],position_array[-1])
+    return position_array
 
 
 def main():
     args=parse_arguments()
-    print(args)
     run(args)
+    
 
     
 if __name__=='__main__':

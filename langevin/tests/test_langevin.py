@@ -93,6 +93,14 @@ def test_run():
         output=test_dir+r'output_test.txt'
         
     v=langevin.run(args)
-    #assert len(v)==1001
+    assert v[-1]>=5 or v[-1]<=0
 
+    
+    
+    
+def test_in_bound():
+    a=langevin.check_in_bounds(2)
+    b=langevin.check_in_bounds(6)
+    assert a is True 
+    return b=='argparse.ArgumentTypeError: 6 is an invalid starting position based on the size of the box' 
     
