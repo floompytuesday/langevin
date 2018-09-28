@@ -15,10 +15,6 @@ def check_in_bounds(value):
     else:
         return True 
 
-
-
-
-
 def parse_arguments(): # pragma: no cover
     '''Get arguements from the command line'''
     parser=argparse.ArgumentParser(description='Langevin Dynamics in Python')
@@ -30,8 +26,7 @@ def parse_arguments(): # pragma: no cover
     parser.add_argument('--total_time', type=float, default=10)
     parser.add_argument('--output', type=str, default=testing_directory+ r'output_test')
     return parser.parse_args()
-    
-                          
+                           
 def write_output(index,velocity,position,time,output_file):
 
     '''writes an output file
@@ -47,8 +42,7 @@ def write_output(index,velocity,position,time,output_file):
     with open(output_file, 'w') as f:
         for i in range(len(index)):
             f.write('{0}, {1:0.06f}, {2:0.06f}, {3:0.06f}\n'.format(index[i], time[i], position[i], velocity[i]))
-
-                        
+                       
 def step(xi,vi,args,testing=False):
     '''calculate one timestep using eulers method
     xi: position value 
@@ -91,13 +85,10 @@ def run(args):
     print(velocity_array[-1],position_array[-1])
     return position_array
 
-
 def main():
     args=parse_arguments()
     run(args)
-    
-
-    
+        
 if __name__=='__main__':
     main()
         

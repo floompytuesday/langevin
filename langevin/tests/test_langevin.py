@@ -12,7 +12,7 @@ from langevin import cli
 from langevin import *
 from os import path
 test_dir = path.dirname(__file__)
-
+import argparse
 @pytest.fixture
 def response():
     """Sample pytest fixture.
@@ -95,12 +95,13 @@ def test_run():
     v=langevin.run(args)
     assert v[-1]>=5 or v[-1]<=0
 
+import unittest   
     
     
-    
-def test_in_bound():
-    a=langevin.check_in_bounds(2)
-    b=langevin.check_in_bounds(6)
-    assert a is True 
-    return b=='argparse.ArgumentTypeError: 6 is an invalid starting position based on the size of the box' 
-    
+class MyTestCase(unittest.TestCase):
+    def test1(self):
+        self.assertRaises(argparse.ArgumentTypeError, langevin.check_in_bounds,6)
+        self.assertRaises(argparse.ArgumentTypeError, langevin.check_in_bounds,-1)
+        a=langevin.check_in_bounds(4)
+        assert a is True
+        
