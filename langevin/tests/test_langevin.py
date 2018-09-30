@@ -105,3 +105,18 @@ class MyTestCase(unittest.TestCase):
         a=langevin.check_in_bounds(4)
         assert a is True
         
+def test_hist():
+    class args:
+        def __init__():
+            pass
+
+        time_step = .1
+        total_time = 100.0
+        initial_position = 0
+        initial_velocity = 10
+        damping_coefficient = 1.0
+        temperature = 1.0
+        output=test_dir+r'output_test.txt'
+    v=langevin.hist(args)
+    assert len(v)==100
+    

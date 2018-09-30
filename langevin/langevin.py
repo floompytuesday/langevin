@@ -85,30 +85,61 @@ def run(args):
             position_array.append(5) #fudge last point for graphing purposes
             break
         if position_array[-1]<0:
-            del position_array[-1] 
-            position_array.append(0)
+            del position_array[-1] #see above
+            position_array.append(0) #for graphing
             break
     write_output(index_array,velocity_array,position_array,time_array,args.output)
-    print(velocity_array[-1],position_array[-1], args.output)
+    #print(velocity_array[-1],position_array[-1], args.output)
+    
+    
+    figposition=plt.figure()
+    position=figposition.add_subplot(111)
+    position.plot(time_array, position_array, 'o')
+    position.set_xlabel('Time')
+    position.set_ylabel('Position')
+    position.set_title('Position Graph of Brownian Motion Particle')
+    figposition.savefig('trajectory.png')
     
     
     
-    plt.plot(time_array, position_array, 'o')
+    return [position_array, time_array, velocity_array]
+
+def hist(args):
+    count=0
+    times=[]
+    while count<100:
+        result=run(args)
+        if result[0][-1]==5:
+            times.append(result[1][-1])
+            count+=1
+        
+    plt.plot(result[1], result[0], 'o')
     plt.xlabel('Time')
     plt.ylabel('Position')
     plt.title('Position Graph of Brownian Motion Particle')
     plt.savefig('trajectory.png')
+    plt.clf()
     
     
     
-    return [position_array, time_array]
+    plt.hist(times)
+    plt.xlabel('times')
+    plt.ylabel('number of occurances')
+    plt.title('histogram of wall times')
+    plt.savefig('histogram.png')
     
-def main():
+    plt.clf()
+    
+    
+    
+    print(result[2][-1],result[0][-1], args.output)
+    return times
+def main(): #pragma: no cover
     args=parse_arguments()
-    run(args)
+    hist(args)
         
 if __name__=='__main__':
-    main()
+    main() #pragma: no cover
         
         
     
