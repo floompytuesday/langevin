@@ -3,7 +3,9 @@
 """Main module."""
 import argparse 
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 from os import path
 
 testing_directory=path.join(path.dirname(__file__), r'tests')
@@ -99,7 +101,7 @@ def run(args):
     
     
     
-    return position_array
+    return position_array, time_array
     
 def main():
     args=parse_arguments()
