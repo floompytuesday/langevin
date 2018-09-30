@@ -101,7 +101,7 @@ def run(args):
     
     
     
-    return position_array, time_array
+    return [position_array, time_array]
     
 def main():
     args=parse_arguments()

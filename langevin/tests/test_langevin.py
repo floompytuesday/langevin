@@ -92,7 +92,7 @@ def test_run():
         temperature = 1.0
         output=test_dir+r'output_test.txt'
         
-    v=langevin.run(args)
+    v=langevin.run(args)[0]
     assert v[-1]==5 or v[-1]==0
 
 import unittest   
