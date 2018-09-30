@@ -105,6 +105,11 @@ def run(args):
     return [position_array, time_array, velocity_array]
 
 def hist(args):
+    '''calls run function until 100 runs that end with the particle hitting wallsize=5 are recorded.  Makes a histogram of times it took the particle to hit the wallsize, and plots the trajectory of the last run to hit the wall
+    
+    args:  command line arguments'''
+    
+  
     count=0
     times=[]
     while count<100:
