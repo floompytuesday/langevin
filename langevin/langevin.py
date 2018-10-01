@@ -6,12 +6,15 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
+plt.rcParams.update({'figure.max_open_warning': 0})
 from os import path
 
 testing_directory=path.join(path.dirname(__file__), r'tests')
 
 
 def check_in_bounds(value):
+    '''checks if a value is between 0 and 5 (the size of the box)
+    value:  number to test'''
     ivalue = float(value)
     if ivalue <= 0 or ivalue>=5:
         raise argparse.ArgumentTypeError("%s is an invalid starting position based on the size of the box" % value)
@@ -116,27 +119,19 @@ def hist(args):
         result=run(args)
         if result[0][-1]==5:
             times.append(result[1][-1])
-            count+=1
-        
+            count+=1  
     plt.plot(result[1], result[0], 'o')
     plt.xlabel('Time')
     plt.ylabel('Position')
     plt.title('Position Graph of Brownian Motion Particle')
     plt.savefig('trajectory.png')
     plt.clf()
-    
-    
-    
     plt.hist(times)
     plt.xlabel('times')
     plt.ylabel('number of occurances')
     plt.title('histogram of wall times')
     plt.savefig('histogram.png')
-    
     plt.clf()
-    
-    
-    
     print(result[2][-1],result[0][-1], args.output)
     return times
 def main(): #pragma: no cover
