@@ -25,6 +25,8 @@ langevin
 This is a one-dimensional Langevin Dynamics program written in Python.  It can be run by typing "python langevin.py" in the appropriate directory.
 Variables such as intial position, initial velocity, and total time can be entered in the command line by using flags (--initial_positon=10) after langevin.py
 Default values for these variables can be found in the source code.  Output will be written to a .txt file with index, time, position, and velocity.
+A histogram will be created with the times of 100 runs that ended with the particle hitting the far wall.  There will also be a plot of trajectory of the
+last of the 100 runs that hit the far wall.
 
 
 * Free software: MIT license
