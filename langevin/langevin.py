@@ -91,20 +91,7 @@ def run(args):
             del position_array[-1] #see above
             position_array.append(0) #for graphing
             break
-    write_output(index_array,velocity_array,position_array,time_array,args.output)
-    #print(velocity_array[-1],position_array[-1], args.output)
-    
-    
-    figposition=plt.figure()
-    position=figposition.add_subplot(111)
-    position.plot(time_array, position_array, 'o')
-    position.set_xlabel('Time')
-    position.set_ylabel('Position')
-    position.set_title('Position Graph of Brownian Motion Particle')
-    figposition.savefig('trajectory.png')
-    
-    
-    
+    write_output(index_array,velocity_array,position_array,time_array,args.output)    
     return [position_array, time_array, velocity_array]
 
 def hist(args):
