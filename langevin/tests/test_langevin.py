@@ -99,7 +99,7 @@ import unittest
     
     
 class MyTestCase(unittest.TestCase):
-    def test1(self):
+    def test_check_in_bounds(self):
         self.assertRaises(argparse.ArgumentTypeError, langevin.check_in_bounds,6)
         self.assertRaises(argparse.ArgumentTypeError, langevin.check_in_bounds,-1)
         a=langevin.check_in_bounds(4)
