@@ -87,7 +87,7 @@ def run(args):
             del position_array[-1] #dont want the point that's outside of the wall
             position_array.append(5) #fudge last point for graphing purposes
             break
-        if position_array[-1]<0:
+        if position_array[-1]<0: 
             del position_array[-1] #see above
             position_array.append(0) #for graphing
             break
@@ -104,8 +104,8 @@ def hist(args):
     times=[]
     while count<100:
         result=run(args)
-        if result[0][-1]==5:
-            times.append(result[1][-1])
+        if result[0][-1]==5:   #only want runs that hit far wall
+            times.append(result[1][-1]) #get time value for histogram
             count+=1  
     plt.plot(result[1], result[0], 'o')
     plt.xlabel('Time')
