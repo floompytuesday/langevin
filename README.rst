@@ -30,7 +30,7 @@ last of the 100 runs that hit the far wall.
 
 
 * Free software: MIT license
-* Documentation: https://langevin.readthedocs.io.
+
 
 
 Features
